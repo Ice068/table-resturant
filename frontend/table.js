@@ -15,36 +15,6 @@ const form = document.getElementById("reservationForm");
 // ===== LOAD DATA =====
 let reservations = JSON.parse(localStorage.getItem("reservations")) || [];
 
-// ===== INIT TIME OPTIONS =====
-function renderTimeOptions(){
-    timeSelect.innerHTML = `<option value="">-- Select Time --</option>`;
-
-    const date = document.getElementById("date").value;
-
-    TIMES.forEach(t => {
-        const option = document.createElement("option");
-        option.value = t;
-        option.textContent = t;
-
-        // disable ถ้าเต็ม
-        if(date && getAvailableTables(date, t) <= 0){
-            option.disabled = true;
-            option.textContent += " (Full)";
-        }
-
-        // disable เวลาที่ผ่านมา (เฉพาะวันนี้)
-        if(date === getToday()){
-            const now = getCurrentTime();
-            if(t <= now){
-                option.disabled = true;
-                option.textContent += " (Passed)";
-            }
-        }
-
-        timeSelect.appendChild(option);
-    });
-}
-
 // ===== HELPERS =====
 function getToday(){
     return new Date().toISOString().split("T")[0];
@@ -52,13 +22,49 @@ function getToday(){
 
 function getCurrentTime(){
     const now = new Date();
-    return now.toTimeString().slice(0,5); // HH:MM
+    return now.toTimeString().slice(0,5);
 }
 
 // ===== CHECK TABLE =====
 function getAvailableTables(date, time){
     const count = reservations.filter(r => r.date === date && r.time === time).length;
     return MAX_TABLES - count;
+}
+
+// ===== RENDER TIME =====
+function renderTimeOptions(){
+    const selectedTime = timeSelect.value; // 🔥 เก็บค่าที่เลือกไว้
+    const date = document.getElementById("date").value;
+
+    timeSelect.innerHTML = `<option value="">-- Select Time --</option>`;
+
+    TIMES.forEach(t => {
+        const option = document.createElement("option");
+        option.value = t;
+        option.textContent = t;
+
+        // ❌ เต็ม
+        if(date && getAvailableTables(date, t) <= 0){
+            option.disabled = true;
+            option.textContent += " (Full)";
+        }
+
+        // ❌ เวลาที่ผ่านมา (แก้แล้ว)
+        if(date === getToday()){
+            const now = getCurrentTime();
+            if(t < now){ // 🔥 FIX ตรงนี้
+                option.disabled = true;
+                option.textContent += " (Passed)";
+            }
+        }
+
+        // 🔥 คืนค่าที่เลือกไว้
+        if(t === selectedTime){
+            option.selected = true;
+        }
+
+        timeSelect.appendChild(option);
+    });
 }
 
 // ===== UPDATE UI =====
@@ -70,24 +76,30 @@ function updateTableUI(){
 
     if(!date || !time){
         tableCount.textContent = MAX_TABLES;
+        tableCount.style.color = "#7CFFB2";
         return;
     }
 
     const available = getAvailableTables(date, time);
     tableCount.textContent = available;
 
-    // เปลี่ยนสี
     tableCount.style.color = available <= 0 ? "red" : "#7CFFB2";
 }
 
 // ===== ALERT =====
 function showAlert(msg, type="danger"){
     alertBox.innerHTML = `
-    <div class="alert alert-${type}">${msg}</div>
+    <div class="alert alert-${type} text-center fw-bold">
+        ${msg}
+    </div>
     `;
 
-    // auto hide
-    setTimeout(() => alertBox.innerHTML = "", 3000);
+    // 🔥 scroll ไปหา alert
+    alertBox.scrollIntoView({ behavior: "smooth" });
+
+    setTimeout(() => {
+        alertBox.innerHTML = "";
+    }, 4000);
 }
 
 // ===== EVENTS =====
@@ -134,8 +146,9 @@ form.addEventListener("submit", function(e){
 
     form.reset();
     tableCount.textContent = MAX_TABLES;
+    tableCount.style.color = "#7CFFB2";
 
-    renderTimeOptions(); // refresh
+    renderTimeOptions(); // refresh ใหม่
 });
 
 // ===== INIT =====
