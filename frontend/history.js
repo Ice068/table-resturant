@@ -2,74 +2,35 @@ document.addEventListener("DOMContentLoaded", () => {
 
     const form = document.getElementById("historyForm");
     const message = document.getElementById("formMessage");
-    const submitBtn = form.querySelector("button[type='submit']");
-
-    let isSubmitting = false;
-
-    // ===== VALIDATION =====
-    function isValidEmail(email){
-        return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
-    }
-
-    function isValidPhone(phone){
-        return /^[0-9]{9,10}$/.test(phone);
-    }
+    const submitBtn = form.querySelector("button");
 
     function showMessage(text, color="white"){
         message.innerText = text;
         message.style.color = color;
     }
 
-    function setLoading(state){
-        isSubmitting = state;
-        submitBtn.disabled = state;
-        submitBtn.innerText = state ? "Processing..." : "Verify";
-    }
-
-    // ===== SUBMIT =====
     form.addEventListener("submit", async (e) => {
         e.preventDefault();
-
-        if(isSubmitting) return;
 
         const reserveNumber = document.getElementById("reserveNumber").value.trim();
         const email = document.getElementById("email").value.trim();
         const phone = document.getElementById("phone").value.trim();
         const otp = document.getElementById("otp").value.trim();
 
-        // ===== CHECK EMPTY =====
         if(!reserveNumber || !email || !phone || !otp){
-            return showMessage("Please fill in all fields", "red");
+            return showMessage("Please fill all fields", "red");
         }
 
-        // ===== FORMAT VALIDATION =====
-        if(!isValidEmail(email)){
-            return showMessage("Invalid email format", "red");
-        }
-
-        if(!isValidPhone(phone)){
-            return showMessage("Phone must be 9-10 digits", "red");
-        }
-
-        if(otp.length !== 6){
-            return showMessage("OTP must be 6 digits", "red");
-        }
-
-        setLoading(true);
-        showMessage("Verifying...", "#aaa");
+        submitBtn.disabled = true;
+        submitBtn.innerText = "Verifying...";
 
         try {
 
-            // ===== TIMEOUT =====
-            const controller = new AbortController();
-            const timeout = setTimeout(() => controller.abort(), 8000);
-
-            const response = await fetch("http://localhost:3000/api/reservations", {
+            const res = await fetch("http://localhost:3000/verify-reservation", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"
                 },
-                signal: controller.signal,
                 body: JSON.stringify({
                     reserveNumber,
                     email,
@@ -78,39 +39,25 @@ document.addEventListener("DOMContentLoaded", () => {
                 })
             });
 
-            clearTimeout(timeout);
+            const data = await res.json();
 
-            const data = await response.json();
+            if(res.ok){
+                showMessage("✔ Reservation Verified!", "#d4af37");
 
-            if(response.ok){
+                console.log("DATA:", data);
 
-                showMessage("✔ Reservation verified!", "#d4af37");
-
-                // reset form
                 form.reset();
-
-                // 🔥 optional redirect
-                // setTimeout(() => {
-                //   window.location.href = `details.html?id=${data.id}`;
-                // }, 1500);
-
             }else{
-                showMessage(data.message || "Verification failed", "red");
+                showMessage(data.message || "Failed", "red");
             }
 
-        } catch (error){
-
-            if(error.name === "AbortError"){
-                showMessage("Request timeout. Try again.", "red");
-            }else{
-                console.error(error);
-                showMessage("Server error. Please try again.", "red");
-            }
-
-        } finally {
-            setLoading(false);
+        } catch (err){
+            console.error(err);
+            showMessage("Server error", "red");
         }
 
+        submitBtn.disabled = false;
+        submitBtn.innerText = "Verify";
     });
 
 });

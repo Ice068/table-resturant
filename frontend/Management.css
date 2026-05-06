@@ -1,20 +1,84 @@
+/* ===== ROOT ===== */
+:root{
+    --gold:#d4af37;
+}
+
+/* ===== BASE ===== */
 body{
     background:#0b0b0b;
     color:white;
     font-family:'Poppins', sans-serif;
 }
 
-/* Sidebar */
-.sidebar{
-    width:230px;
-    height:100vh;
+/* ===== TOPBAR ===== */
+.topbar{
     position:fixed;
-    background:black;
-    padding:25px;
+    top:0;
+    left:0;
+    width:100%;
+    height:60px;
+    background:#111;
+    display:flex;
+    align-items:center;
+    z-index:1000;
+    border-bottom:1px solid rgba(212,175,55,0.2);
 }
 
+.topbar-left{
+    display:flex;
+    align-items:center;
+    gap:15px;
+}
+
+.menu-toggle{
+    font-size:22px;
+    cursor:pointer;
+    transition:0.2s;
+}
+
+.menu-toggle:hover{
+    color:var(--gold);
+}
+
+.title{
+    font-size:18px;
+    letter-spacing:1px;
+}
+
+.topbar-right{
+    display:flex;
+    align-items:center;
+    gap:12px;
+}
+
+.avatar{
+    border-radius:50%;
+    border:2px solid var(--gold);
+}
+
+/* ===== SIDEBAR ===== */
+.sidebar{
+    position:fixed;
+    top:60px;
+    left:0;
+    width:230px;
+    height:calc(100vh - 60px);
+    background:black;
+    padding:25px 20px;
+    transition:0.3s ease;
+    z-index:999;
+}
+
+/* 🔥 ซ่อน sidebar */
+.sidebar.hide{
+    transform:translateX(-100%);
+}
+
+/* ===== SIDEBAR CONTENT ===== */
 .sidebar h3{
-    color:#d4af37;
+    color:var(--gold);
+    margin-bottom:30px;
+    letter-spacing:3px;
 }
 
 .sidebar a{
@@ -22,31 +86,56 @@ body{
     color:white;
     margin:15px 0;
     text-decoration:none;
+    transition:0.3s;
+    font-size:14px;
+    letter-spacing:1px;
 }
 
 .sidebar a:hover{
-    color:#d4af37;
+    color:var(--gold);
+    transform:translateX(5px);
 }
 
-/* Content */
+/* ===== CONTENT ===== */
 .content{
-    margin-left:250px;
+    margin-left:230px;
+    margin-top:60px;
     padding:30px;
+    transition:0.3s ease;
 }
 
-/* Table */
+/* 🔥 ตอน sidebar หาย */
+.content.full{
+    margin-left:0;
+}
+
+/* ===== TABLE ===== */
 .table{
     background:white;
     color:black;
-}
-
-/* Status */
-.status{
-    padding:5px 10px;
     border-radius:10px;
-    font-size:12px;
+    overflow:hidden;
 }
 
-.pending{background:orange;}
-.confirmed{background:green; color:white;}
-.cancelled{background:red; color:white;}
+/* ===== STATUS ===== */
+.status{
+    padding:5px 12px;
+    border-radius:20px;
+    font-size:12px;
+    display:inline-block;
+}
+
+.pending{
+    background:orange;
+    color:black;
+}
+
+.confirmed{
+    background:green;
+    color:white;
+}
+
+.cancelled{
+    background:red;
+    color:white;
+}

@@ -33,45 +33,17 @@
 <!-- ===== SIDEBAR ===== -->
 <div class="sidebar" id="sidebar">
     <h3>ECLIPSE</h3>
-    <a href="dashboard.html">📊 Dashboard</a>
-    <a href="Management.html" class="active">📋 Management</a>
+    <a href="dashboard.html" class="active">📊 Dashboard</a>
+    <a href="Management.html">📋 Management</a>
     <a href="Table-Status.html">🍽 Tables</a>
-    <a href="#">🚪 Logout</a>
+    <a href="#">⚙ Settings</a>
+    <a href="#" onclick="logout()">🚪 Logout</a>
 </div>
 
 <!-- ===== CONTENT ===== -->
-<div class="content">
+<div class="content" id="content">
 
-    <h2 class="mb-4">Dashboard</h2>
-
-    <!-- Stats -->
-    <div class="row mb-4">
-        <div class="col-md-4">
-            <div class="card-box">
-                <h3 id="total">0</h3>
-                <p>Total Reservations</p>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card-box">
-                <h3 id="today">0</h3>
-                <p>Today</p>
-            </div>
-        </div>
-
-        <div class="col-md-4">
-            <div class="card-box">
-                <h3 id="available">10</h3>
-                <p>Available Tables</p>
-            </div>
-        </div>
-    </div>
-
-<!-- Content -->
-<div class="content">
-
-<h2>Reservation Management</h2>
+<h2 class="mb-4">Reservation Management</h2>
 
 <!-- Filters -->
 <div class="row mb-3">
@@ -115,6 +87,23 @@
 
 <script src="Management.js"></script>
 
+<!-- ===== SCRIPT ===== -->
+<script>
+function toggleSidebar(){
+    document.getElementById("sidebar").classList.toggle("hide");
+    document.getElementById("content").classList.toggle("full");
+}
+
+function logout(){
+    localStorage.removeItem("adminToken");
+    window.location.href = "login.html";
+}
+
+// 🔒 กันเข้าหน้านี้ถ้าไม่ login
+if(!localStorage.getItem("adminToken")){
+    window.location.href = "login.html";
+}
+</script>
+
 </body>
 </html>
-

@@ -3,9 +3,17 @@
 // ==========================
 let reservations = JSON.parse(localStorage.getItem("reservations")) || [];
 
-// add default status
-reservations.forEach(r => {
-    if(!r.status) r.status = "pending";
+// 🔥 เพิ่ม id + status (กันพัง)
+reservations = reservations.map((r, index) => {
+    return {
+        id: r.id || (Date.now() + index), // unique id
+        fullname: r.fullname,
+        email: r.email,
+        date: r.date,
+        time: r.time,
+        guests: r.guests,
+        status: r.status || "pending"
+    };
 });
 
 // ==========================
@@ -16,12 +24,17 @@ function renderTable(data){
     const tbody = document.getElementById("tableBody");
     tbody.innerHTML = "";
 
-    data.forEach((r,i)=>{
+    if(data.length === 0){
+        tbody.innerHTML = `<tr><td colspan="8" class="text-center">No data</td></tr>`;
+        return;
+    }
+
+    data.forEach((r, i) => {
 
         const tr = document.createElement("tr");
 
         tr.innerHTML = `
-        <td>${i+1}</td>
+        <td>${i + 1}</td>
         <td>${r.fullname}</td>
         <td>${r.email}</td>
         <td>${r.date}</td>
@@ -33,9 +46,9 @@ function renderTable(data){
             </span>
         </td>
         <td>
-            <button class="btn btn-success btn-sm" onclick="confirmRes(${i})">✔</button>
-            <button class="btn btn-warning btn-sm" onclick="cancelRes(${i})">✖</button>
-            <button class="btn btn-danger btn-sm" onclick="deleteRes(${i})">🗑</button>
+            <button class="btn btn-success btn-sm" onclick="confirmRes('${r.id}')">✔</button>
+            <button class="btn btn-warning btn-sm" onclick="cancelRes('${r.id}')">✖</button>
+            <button class="btn btn-danger btn-sm" onclick="deleteRes('${r.id}')">🗑</button>
         </td>
         `;
 
@@ -44,21 +57,27 @@ function renderTable(data){
 }
 
 // ==========================
-// ACTIONS
+// ACTIONS (ใช้ id แทน index)
 // ==========================
-function confirmRes(i){
-    reservations[i].status = "confirmed";
-    save();
+function confirmRes(id){
+    const item = reservations.find(r => r.id == id);
+    if(item){
+        item.status = "confirmed";
+        save();
+    }
 }
 
-function cancelRes(i){
-    reservations[i].status = "cancelled";
-    save();
+function cancelRes(id){
+    const item = reservations.find(r => r.id == id);
+    if(item){
+        item.status = "cancelled";
+        save();
+    }
 }
 
-function deleteRes(i){
+function deleteRes(id){
     if(confirm("Delete this reservation?")){
-        reservations.splice(i,1);
+        reservations = reservations.filter(r => r.id != id);
         save();
     }
 }
@@ -80,7 +99,7 @@ function applyFilters(){
     const date = document.getElementById("filterDate").value;
     const status = document.getElementById("filterStatus").value;
 
-    let filtered = reservations.filter(r => {
+    const filtered = reservations.filter(r => {
 
         const matchText =
             r.fullname.toLowerCase().includes(keyword) ||
@@ -106,3 +125,11 @@ document.getElementById("filterStatus").addEventListener("change", applyFilters)
 // INIT
 // ==========================
 applyFilters();
+
+function toggleSidebar(){
+    const sidebar = document.getElementById("sidebar");
+    const content = document.querySelector(".content");
+
+    sidebar.classList.toggle("hide");
+    content.classList.toggle("full");
+}
