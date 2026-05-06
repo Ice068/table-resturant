@@ -1,0 +1,87 @@
+:root{
+    --gold:#d4af37;
+}
+
+/* ===== BASE ===== */
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:'Poppins', sans-serif;
+}
+
+/* ===== LAYOUT ===== */
+.container{
+    padding:30px;
+}
+
+/* ===== GRID ===== */
+.table-grid{
+    display:grid;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+    gap:20px;
+}
+
+/* ===== TABLE CARD ===== */
+.table-card{
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+    cursor:pointer;
+    transition:0.3s;
+    border:2px solid transparent;
+}
+
+.table-card:hover{
+    transform:translateY(-5px);
+}
+
+/* ===== STATUS COLORS ===== */
+.available{
+    background:#1e1e1e;
+    border-color:#28a745;
+}
+
+.reserved{
+    background:#2b1e00;
+    border-color:var(--gold);
+}
+
+.occupied{
+    background:#2b0000;
+    border-color:#dc3545;
+}
+
+/* ===== TEXT ===== */
+.table-number{
+    font-size:24px;
+    font-weight:bold;
+}
+
+.status-text{
+    font-size:14px;
+    margin-top:5px;
+    opacity:0.8;
+}
+
+/* ===== LEGEND ===== */
+.legend{
+    display:flex;
+    gap:20px;
+    margin-bottom:20px;
+}
+
+.legend div{
+    display:flex;
+    align-items:center;
+    gap:8px;
+}
+
+.dot{
+    width:14px;
+    height:14px;
+    border-radius:50%;
+}
+
+.green{background:#28a745;}
+.gold{background:#d4af37;}
+.red{background:#dc3545;}
