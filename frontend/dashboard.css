@@ -1,0 +1,59 @@
+body{
+    background:#0b0b0b;
+    color:white;
+    font-family:'Poppins', sans-serif;
+}
+
+/* Sidebar */
+.sidebar{
+    width:230px;
+    height:100vh;
+    position:fixed;
+    background:black;
+    padding:25px;
+}
+
+.sidebar h3{
+    color:#d4af37;
+    margin-bottom:30px;
+}
+
+.sidebar a{
+    display:block;
+    color:white;
+    margin:15px 0;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.sidebar a:hover{
+    color:#d4af37;
+}
+
+/* Content */
+.content{
+    margin-left:250px;
+    padding:30px;
+}
+
+/* Cards */
+.card-box{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(212,175,55,0.3);
+    padding:20px;
+    border-radius:15px;
+    text-align:center;
+}
+
+/* Chart */
+canvas{
+    background:white;
+    border-radius:10px;
+    padding:10px;
+}
+
+/* Table */
+.table{
+    background:white;
+    color:black;
+}

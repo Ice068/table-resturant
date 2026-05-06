@@ -1,0 +1,137 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+::after,
+::before,
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f6fa;
+}
+
+a {
+    text-decoration: none;
+}
+
+li {
+    list-style: none;
+}
+
+/* Wrapper & Main Layout */
+.wrapper {
+    align-items: stretch;
+    display: flex;
+    width: 100%;
+}
+
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow: hidden;
+    transition: all 0.35s ease-in-out;
+}
+
+/* Sidebar Styling */
+#sidebar {
+    max-width: 264px;
+    min-width: 264px;
+    background: #212529;
+    transition: all 0.35s ease-in-out;
+}
+
+/* Toggle Sidebar (ย่อ Sidebar) */
+#sidebar.collapsed {
+    margin-left: -264px;
+}
+
+.sidebar-logo {
+    padding: 1.15rem 1.5rem;
+}
+
+.sidebar-logo a {
+    color: #e9ecef;
+    font-size: 1.25rem;
+    font-weight: 600;
+}
+
+.sidebar-nav {
+    padding: 0;
+}
+
+.sidebar-header {
+    color: #e9ecef;
+    font-size: .75rem;
+    padding: 1.5rem 1.5rem .375rem;
+}
+
+.sidebar-item {
+    padding: 0;
+}
+
+.sidebar-link {
+    padding: .625rem 1.625rem;
+    color: #e9ecef;
+    display: block;
+    font-size: 0.9rem;
+    white-space: nowrap;
+    border-left: 3px solid transparent;
+    transition: all 0.2s;
+}
+
+.sidebar-link:hover {
+    background: rgba(255, 255, 255, 0.05);
+    border-left: 3px solid #3b7ddd;
+    color: #fff;
+}
+
+.sidebar-dropdown .sidebar-link {
+    padding-left: 3rem;
+    font-size: 0.85rem;
+}
+
+/* Navbar */
+.navbar {
+    background-color: #fff;
+}
+
+.avatar {
+    height: 40px;
+    width: 40px;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    #sidebar {
+        margin-left: -264px;
+    }
+    
+    #sidebar.collapsed {
+        margin-left: 0;
+    }
+}
+/* ตรวจสอบให้แน่ใจว่า .main ไม่ได้ตั้ง overflow: hidden ไว้ */
+.main {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    width: 100%;
+    overflow-x: hidden; /* ใช้ overflow-x แทน overflow เฉยๆ */
+}
+
+/* ปรับระยะห่างของ Dropdown ให้ไม่ติดขอบเกินไป */
+.dropdown-menu-end {
+    right: 0 !important;
+    left: auto !important;
+    margin-top: 10px !important; /* เว้นระยะจากรูป Profile ลงมาหน่อย */
+}
+
+/* ป้องกันเมนูไปทับซ้อนกับองค์ประกอบอื่น */
+.navbar {
+    z-index: 1000;
+}

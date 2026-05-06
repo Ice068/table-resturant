@@ -182,3 +182,27 @@ body{
         font-size:14px;
     }
 }
+
+/* ===== Hidden Admin Button ===== */
+.admin-secret{
+    position:fixed;
+    bottom:10px;
+    right:10px;
+
+    width:18px;
+    height:18px;
+
+    opacity:0.05; /* แทบมองไม่เห็น */
+    background:#d4af37;
+
+    border-radius:50%;
+    z-index:9999;
+
+    transition:0.3s;
+}
+
+/* hover แล้วเห็น */
+.admin-secret:hover{
+    opacity:0.4;
+    transform:scale(1.3);
+}

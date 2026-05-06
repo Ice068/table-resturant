@@ -1,0 +1,265 @@
+/* ========================
+   THEME
+======================== */
+:root{
+    --gold:#d4af37;
+    --dark:#0b0b0b;
+    --glass:rgba(255,255,255,0.05);
+    --border:rgba(212,175,55,0.3);
+}
+
+/* ========================
+   BASE
+======================== */
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background:var(--dark);
+    color:white;
+    overflow-x:hidden;
+    padding-top:110px;
+}
+
+/* ========================
+   NAVBAR (Premium)
+======================== */
+.custom-navbar{
+    position:fixed;
+    top:0;
+    width:100%;
+    z-index:1000;
+    padding:18px 0;
+
+    background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.9),
+        rgba(0,0,0,0.5)
+    );
+
+    backdrop-filter:blur(12px);
+    transition:0.4s;
+}
+
+.nav-scrolled{
+    background:rgba(0,0,0,0.95);
+    padding:12px 0;
+}
+
+.logo{
+    font-family:'Playfair Display', serif;
+    font-size:36px;
+    letter-spacing:6px;
+    text-decoration:none;
+    color:white;
+}
+
+/* Menu */
+.menu-link{
+    position:relative;
+    font-family:'Playfair Display', serif;
+    font-size:16px;
+    letter-spacing:2px;
+    margin:0 15px;
+    text-decoration:none;
+    color:white;
+    transition:0.3s;
+}
+
+.menu-link:hover{
+    color:var(--gold);
+}
+
+/* underline animation center */
+.menu-link::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:var(--gold);
+    transform:translateX(-50%);
+    transition:0.3s;
+}
+
+.menu-link:hover::after{
+    width:100%;
+}
+
+.active-link{
+    color:var(--gold);
+}
+
+.active-link::after{
+    width:100%;
+}
+
+/* Reservation Button */
+.reservation-btn{
+    border:2px solid var(--gold);
+    color:var(--gold);
+    padding:8px 26px;
+    border-radius:50px;
+    margin-left:20px;
+    letter-spacing:2px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.reservation-btn:hover{
+    background:var(--gold);
+    color:black;
+    box-shadow:0 0 20px rgba(212,175,55,0.5);
+}
+
+/* ========================
+   TITLE
+======================== */
+.page-title{
+    font-family:'Playfair Display', serif;
+    font-size:60px;
+    text-align:center;
+    margin-bottom:20px;
+    letter-spacing:5px;
+}
+
+.page-sub{
+    text-align:center;
+    opacity:0.7;
+    letter-spacing:2px;
+    margin-bottom:50px;
+}
+
+/* ========================
+   BUTTONS
+======================== */
+.btn-section{
+    text-align:center;
+    margin-bottom:40px;
+}
+
+.btn-dining,
+.btn-bar{
+    background:transparent;
+    border:2px solid var(--gold);
+    color:var(--gold);
+    padding:10px 30px;
+    border-radius:40px;
+    margin:0 10px;
+    transition:0.3s;
+}
+
+.btn-dining.active,
+.btn-bar.active,
+.btn-dining:hover,
+.btn-bar:hover{
+    background:var(--gold);
+    color:black;
+    box-shadow:0 0 15px rgba(212,175,55,0.4);
+}
+
+/* ========================
+   MENU BOX (Glass + Glow)
+======================== */
+.menu-box{
+    width:80%;
+    margin:0 auto 80px;
+    padding:50px;
+
+    border:1px solid var(--border);
+    border-radius:20px;
+
+    background:var(--glass);
+    backdrop-filter:blur(15px);
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.8),
+        0 0 20px rgba(212,175,55,0.08);
+
+    transition:0.4s;
+}
+
+.menu-box:hover{
+    transform:translateY(-5px);
+}
+
+/* Title */
+.menu-box h3{
+    font-size:30px;
+    margin-bottom:25px;
+    font-family:'Playfair Display', serif;
+}
+
+/* ========================
+   MENU ITEM
+======================== */
+.menu-item{
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:16px 0;
+    border-bottom:1px solid var(--border);
+
+    transition:0.3s;
+}
+
+/* remove last border */
+.menu-item:last-child{
+    border-bottom:none;
+}
+
+/* name */
+.menu-item span:first-child{
+    font-size:18px;
+}
+
+/* price */
+.menu-item span:last-child{
+    font-size:15px;
+    opacity:0.7;
+}
+
+/* hover */
+.menu-item:hover{
+    color:var(--gold);
+    transform:translateX(6px);
+    text-shadow:0 0 10px rgba(212,175,55,0.6);
+}
+
+/* ========================
+   IMAGE
+======================== */
+.food-img{
+    width:100%;
+    border-radius:20px;
+    transition:0.4s;
+}
+
+.food-img:hover{
+    transform:scale(1.05);
+}
+
+/* ========================
+   RESPONSIVE
+======================== */
+@media(max-width:768px){
+
+    .page-title{
+        font-size:36px;
+    }
+
+    .menu-box{
+        width:95%;
+        padding:25px;
+    }
+
+    .logo{
+        font-size:26px;
+    }
+
+    .menu-link{
+        display:block;
+        margin:10px 0;
+    }
+}
