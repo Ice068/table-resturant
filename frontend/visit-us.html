@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>ECLIPSE | Visit Us</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<!-- Fonts -->
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Poppins:wght@300;400;500&display=swap" rel="stylesheet">
+
+<!-- Leaflet -->
+<link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css"/>
+
+<link rel="stylesheet" href="visit-us.css">
+</head>
+
+<body>
+
+<!-- ===== Navbar ===== -->
+<nav class="navbar navbar-expand-lg fixed-top custom-navbar">
+  <div class="container-fluid px-5">
+
+    <a class="navbar-brand logo" href="index.html">ECLIPSE</a>
+
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navMenu">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navMenu">
+      <a class="menu-link nav-link" href="history.html">History</a>
+      <a class="menu-link nav-link active-link" href="#">Visit Us</a>
+      <a class="menu-link nav-link" href="Dining&Drink.html">Dining & Drinks</a>
+
+      <a href="Reserve Your Table.html" class="visit-btn ms-lg-3">
+        RESERVE A TABLE
+      </a>
+    </div>
+
+  </div>
+</nav>
+
+<!-- ===== Visit Section ===== -->
+<section class="visit-section container">
+
+  <div class="text-center mb-5">
+    <h1 class="section-title">Visit Us</h1>
+    <p class="section-sub">Experience fine dining in the heart of Bangkok</p>
+  </div>
+
+  <div class="row g-5 align-items-stretch">
+
+    <!-- ===== Info ===== -->
+    <div class="col-lg-5">
+      <div class="info-box h-100">
+
+        <h3>Location</h3>
+        <p>123 Luxury Avenue<br>Bangkok, Thailand</p>
+
+        <h3>Opening Hours</h3>
+        <p>Mon – Fri : 17:00 – 23:00</p>
+        <p>Sat – Sun : 16:00 – 00:00</p>
+
+        <h3>Contact</h3>
+        <p>+66 98 765 4321</p>
+        <p>contact@eclipse.com</p>
+
+        <!-- Buttons -->
+        <div class="d-flex gap-3 flex-wrap mt-4">
+          <a href="https://www.google.com/maps?q=13.756331,100.501765"
+             target="_blank"
+             class="btn btn-gold">
+             Google Maps
+          </a>
+
+          <button onclick="openDirections()" class="btn btn-outline-light">
+            Directions
+          </button>
+        </div>
+
+      </div>
+    </div>
+
+    <!-- ===== Map ===== -->
+    <div class="col-lg-7">
+      <div class="map-box">
+        <div id="map"></div>
+      </div>
+    </div>
+
+  </div>
+
+</section>
+
+<!-- ===== JS ===== -->
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script src="visit-us.js"></script>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>
