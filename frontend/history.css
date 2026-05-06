@@ -1,0 +1,45 @@
+body{
+  background:#0b0b0b;
+  color:white;
+  font-family:'Poppins', sans-serif;
+}
+
+.container{
+  margin-top:100px;
+}
+
+h1{
+  font-family:'Playfair Display', serif;
+  letter-spacing:4px;
+}
+
+.table{
+  background:#111;
+  color:white;
+}
+
+.table th{
+  letter-spacing:2px;
+}
+
+.badge-success{
+  background:#198754;
+}
+
+.badge-cancel{
+  background:#dc3545;
+}
+
+.btn-gold{
+  background:#d4af37;
+  color:black;
+  border:none;
+}
+
+.btn-gold:hover{
+  background:#b8962e;
+}
+
+.search-box{
+  max-width:300px;
+}
