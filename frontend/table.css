@@ -1,0 +1,257 @@
+/* ===== Theme Variables (ให้เหมือนหน้าปก) ===== */
+:root{
+    --gold:#d4af37;
+    --dark:#0b0b0b;
+    --glass:rgba(0,0,0,0.55);
+    --border:rgba(212,175,55,0.3);
+}
+
+/* ===== Base ===== */
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background:
+        linear-gradient(rgba(0,0,0,0.85), rgba(0,0,0,0.9)),
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0')
+        center/cover no-repeat fixed;
+    color:white;
+}
+
+/* ===== Navbar (เหมือนหน้าแรก) ===== */
+.custom-navbar{
+    padding:18px 0;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter:blur(12px);
+    transition:0.4s;
+}
+
+.logo{
+    font-family:'Playfair Display', serif;
+    font-size:36px;
+    letter-spacing:6px;
+    color:white;
+}
+
+/* ===== Back Button ===== */
+.back-btn{
+    position:absolute;
+    top:110px;
+    left:40px;
+    color:white;
+    text-decoration:none;
+    letter-spacing:2px;
+    transition:0.3s;
+}
+
+.back-btn:hover{
+    color:var(--gold);
+}
+
+/* ===== Form Container (Glass Effect) ===== */
+.form-box{
+    max-width:520px;
+    margin:140px auto;
+    padding:40px;
+
+    background:var(--glass);
+    backdrop-filter:blur(20px);
+
+    border:1px solid var(--border);
+    border-radius:20px;
+
+    box-shadow:
+        0 0 40px rgba(0,0,0,0.8),
+        0 0 20px rgba(212,175,55,0.08);
+
+    animation:fadeUp 1s ease;
+}
+
+/* ===== Title ===== */
+.title{
+    font-family:'Playfair Display', serif;
+    font-size:36px;
+    text-align:center;
+    margin-bottom:25px;
+    letter-spacing:4px;
+
+    color:white;
+}
+
+/* ===== Inputs ===== */
+.form-label{
+    font-size:14px;
+    letter-spacing:2px;
+    opacity:0.8;
+}
+
+.form-control{
+    background:rgba(255,255,255,0.05);
+    border:1px solid rgba(255,255,255,0.1);
+    color:white;
+    border-radius:10px;
+    padding:10px 12px;
+}
+
+.form-control:focus{
+    background:rgba(255,255,255,0.08);
+    border-color:var(--gold);
+    box-shadow:0 0 10px rgba(212,175,55,0.4);
+    color:white;
+}
+
+/* ===== Select ===== */
+select.form-control{
+    appearance:none;
+}
+
+/* ===== Alert ===== */
+.alert{
+    border:none;
+    font-size:14px;
+    border-radius:10px;
+}
+
+/* ===== Available Table ===== */
+.alert-success{
+    background:rgba(0,255,100,0.08);
+    color:#7CFFB2;
+}
+
+/* ===== Button ===== */
+.btn-gold{
+    background:transparent;
+    border:2px solid var(--gold);
+    color:var(--gold);
+    border-radius:50px;
+    padding:12px;
+    letter-spacing:3px;
+    transition:0.3s;
+}
+
+.btn-gold:hover{
+    background:var(--gold);
+    color:black;
+    box-shadow:0 0 25px rgba(212,175,55,0.6);
+    transform:translateY(-2px);
+}
+
+/* ===== Animation ===== */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+    .form-box{
+        margin:120px 15px;
+        padding:25px;
+    }
+
+    .title{
+        font-size:26px;
+    }
+
+    .logo{
+        font-size:26px;
+    }
+
+    .back-btn{
+        top:90px;
+        left:20px;
+    }
+}
+/* ===== Navbar Premium (เหมือนในภาพ) ===== */
+.custom-navbar{
+    padding:18px 0;
+
+    /* ไล่สีด้านบนให้มืด */
+    background:linear-gradient(
+        to bottom,
+        rgba(0,0,0,0.85),
+        rgba(0,0,0,0.4)
+    );
+
+    backdrop-filter: blur(10px);
+    transition:0.4s;
+}
+
+/* ตอน scroll */
+.nav-scrolled{
+    background:rgba(0,0,0,0.95);
+    padding:12px 0;
+}
+
+/* ===== Logo ===== */
+.logo{
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    letter-spacing:6px;
+    color:white;
+}
+
+/* ===== Menu ===== */
+.menu-link{
+    color:white;
+    font-size:15px;
+    letter-spacing:2px;
+    margin:0 15px;
+    position:relative;
+    transition:0.3s;
+}
+
+.menu-link:hover{
+    color:#d4af37;
+}
+
+/* underline center animation */
+.menu-link::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:#d4af37;
+    transform:translateX(-50%);
+    transition:0.3s;
+}
+
+.menu-link:hover::after{
+    width:100%;
+}
+
+/* ===== Reservation Button (เหมือนในภาพ) ===== */
+.reservation-btn{
+    background:#d4af37;
+    color:black;
+    padding:10px 28px;
+    border-radius:50px;
+    font-size:14px;
+    letter-spacing:2px;
+    border:none;
+    transition:0.3s;
+}
+
+.reservation-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(212,175,55,0.5);
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+    .logo{
+        font-size:26px;
+    }
+
+    .menu-link{
+        margin:10px 0;
+        display:block;
+    }
+}

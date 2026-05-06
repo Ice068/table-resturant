@@ -1,0 +1,184 @@
+/* ===== Base ===== */
+:root{
+    --gold:#d4af37;
+    --dark:#0b0b0b;
+}
+
+body{
+    margin:0;
+    font-family:'Poppins', sans-serif;
+    background:var(--dark);
+    color:white;
+    overflow-x:hidden;
+}
+
+/* ===== Navbar (Glass + Luxury) ===== */
+.custom-navbar{
+    padding:18px 0;
+    background:rgba(0,0,0,0.4);
+    backdrop-filter: blur(12px);
+    transition:0.4s;
+}
+
+.nav-scrolled{
+    background:rgba(0,0,0,0.9);
+    padding:12px 0;
+}
+
+/* Logo */
+.logo{
+    font-family:'Playfair Display', serif;
+    font-size:38px;
+    letter-spacing:6px;
+    color:white;
+}
+
+/* Menu */
+.menu-link{
+    color:white;
+    letter-spacing:2px;
+    font-size:15px;
+    position:relative;
+    transition:0.3s;
+}
+
+.menu-link:hover{
+    color:var(--gold);
+}
+
+/* underline smooth */
+.menu-link::after{
+    content:"";
+    position:absolute;
+    left:50%;
+    bottom:-6px;
+    width:0%;
+    height:2px;
+    background:var(--gold);
+    transform:translateX(-50%);
+    transition:0.3s;
+}
+
+.menu-link:hover::after{
+    width:100%;
+}
+
+/* Button */
+.reservation-btn{
+    background:var(--gold);
+    color:black;
+    padding:10px 28px;
+    border-radius:50px;
+    font-size:14px;
+    letter-spacing:2px;
+    border:none;
+    transition:0.3s;
+}
+
+.reservation-btn:hover{
+    transform:translateY(-2px);
+    box-shadow:0 0 20px rgba(212,175,55,0.5);
+}
+
+/* ===== Hero ===== */
+.hero{
+    height:100vh;
+    background:
+        linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)),
+        url('https://images.unsplash.com/photo-1414235077428-338989a2e8c0') center/cover no-repeat;
+    
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    position:relative;
+
+    animation:zoomHero 12s ease infinite alternate;
+}
+
+/* subtle zoom effect */
+@keyframes zoomHero{
+    from{ background-size:100%; }
+    to{ background-size:110%; }
+}
+
+/* content */
+.hero-content{
+    max-width:900px;
+    animation:fadeUp 1.5s ease;
+}
+
+.hero h1{
+    font-family:'Playfair Display', serif;
+    font-size:clamp(50px, 9vw, 120px);
+    letter-spacing:10px;
+    margin:0;
+
+    /* glow text */
+    text-shadow:0 0 25px rgba(255,255,255,0.15);
+}
+
+.hero p{
+    margin-top:15px;
+    font-size:clamp(14px,2vw,18px);
+    letter-spacing:4px;
+    opacity:0.8;
+}
+
+/* button */
+.hero-btn{
+    display:inline-block;
+    margin-top:35px;
+    padding:14px 40px;
+    border-radius:50px;
+    border:2px solid var(--gold);
+    color:var(--gold);
+    letter-spacing:3px;
+    text-decoration:none;
+    transition:0.3s;
+}
+
+.hero-btn:hover{
+    background:var(--gold);
+    color:black;
+    box-shadow:0 0 25px rgba(212,175,55,0.6);
+}
+
+/* Scroll text */
+.scroll-down{
+    position:absolute;
+    bottom:25px;
+    left:50%;
+    transform:translateX(-50%);
+    font-size:12px;
+    letter-spacing:3px;
+    opacity:0.6;
+}
+
+/* animation */
+@keyframes fadeUp{
+    from{
+        opacity:0;
+        transform:translateY(40px);
+    }
+    to{
+        opacity:1;
+        transform:translateY(0);
+    }
+}
+
+/* ===== Responsive ===== */
+@media(max-width:768px){
+    .logo{
+        font-size:26px;
+    }
+
+    .hero h1{
+        letter-spacing:6px;
+    }
+
+    .hero-btn{
+        padding:12px 28px;
+        font-size:14px;
+    }
+}
