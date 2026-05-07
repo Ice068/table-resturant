@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", async () => {
 
     try {
         // 2. ✅ แก้ URL ให้เป็นของ Render (หรือ Vercel) ที่คุณ Deploy ไว้
-        const res = await fetch("https://ชื่อโปรเจกต์ของคุณ.onrender.com/api/reservations", {
+        const res = await fetch("https://resturant-duo.onrender.com/api/reservations", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
