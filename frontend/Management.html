@@ -96,12 +96,12 @@ function toggleSidebar(){
 
 function logout(){
     localStorage.removeItem("adminToken");
-    window.location.href = "login.html";
+    window.location.href = "login-admin.html";
 }
 
 // 🔒 กันเข้าหน้านี้ถ้าไม่ login
 if(!localStorage.getItem("adminToken")){
-    window.location.href = "login.html";
+    window.location.href = "login-admin.html";
 }
 </script>
 
