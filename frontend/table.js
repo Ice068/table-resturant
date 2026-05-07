@@ -107,7 +107,7 @@ document.getElementById("date").addEventListener("change", updateTableUI);
 timeSelect.addEventListener("change", updateTableUI);
 
 // ===== SUBMIT =====
-form.addEventListener("submit", function(e){
+form.addEventListener("submit", async function(e){ // 🔥 เติม async ตรงนี้
     e.preventDefault();
 
     const fullname = document.getElementById("fullname").value.trim();
@@ -115,6 +115,9 @@ form.addEventListener("submit", function(e){
     const date = document.getElementById("date").value;
     const time = timeSelect.value;
     const guests = document.getElementById("guests").value;
+    
+    // ดึงค่าปุ่มมาทำ Loading จะได้ดูโปรๆ
+    const btn = form.querySelector("button");
 
     // ===== VALIDATION =====
     if(!fullname || !email || !date || !time || !guests){
@@ -131,24 +134,43 @@ form.addEventListener("submit", function(e){
         return showAlert("No tables available");
     }
 
-    // ===== SAVE =====
-    reservations.push({
-        fullname,
-        email,
-        date,
-        time,
-        guests
-    });
+    // 🔥 เปลี่ยน UI เป็น Loading
+    btn.disabled = true;
+    btn.innerText = "Processing...";
 
-    localStorage.setItem("reservations", JSON.stringify(reservations));
+    // ===== SAVE TO BACKEND =====
+    try {
+        // 🚨 อย่าลืมแก้ URL ตรงนี้เป็นเว็บของคุณบน Render!
+        const res = await fetch("https://ชื่อโปรเจกต์ของคุณ.onrender.com/api/reservations", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ fullname, email, date, time, guests })
+        });
 
-    showAlert("Reservation successful!", "success");
+        const data = await res.json();
 
-    form.reset();
-    tableCount.textContent = MAX_TABLES;
-    tableCount.style.color = "#08b222";
+        if (res.ok) {
+            // โชว์ข้อความสำเร็จ และอาจจะแถมโชว์รหัสการจอง
+            showAlert(`Reservation successful! Your OTP: ${data.otp}`, "success");
+            
+            form.reset();
+            tableCount.textContent = MAX_TABLES;
+            tableCount.style.color = "#08b222";
+            renderTimeOptions();
+        } else {
+            showAlert(data.message || "Failed to reserve", "danger");
+        }
 
-    renderTimeOptions(); // refresh ใหม่
+    } catch (error) {
+        console.error("Booking Error:", error);
+        showAlert("Server error. Please try again.", "danger");
+    } finally {
+        // กลับมาเปิดปุ่มเหมือนเดิม
+        btn.disabled = false;
+        btn.innerText = "Confirm Reservation";
+    }
 });
 
 // ===== INIT =====
