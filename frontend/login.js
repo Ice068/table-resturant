@@ -13,7 +13,7 @@ document.getElementById('loginForm').addEventListener('submit', async function(e
 
     try {
 
-        const res = await fetch("hhttps://resturant-duo.onrender.com/login", {
+        const res = await fetch("https://resturant-duo.onrender.com/login", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
