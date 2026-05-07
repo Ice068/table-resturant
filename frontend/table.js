@@ -141,7 +141,7 @@ form.addEventListener("submit", async function(e){ // 🔥 เติม async �
     // ===== SAVE TO BACKEND =====
     try {
         // 🚨 อย่าลืมแก้ URL ตรงนี้เป็นเว็บของคุณบน Render!
-        const res = await fetch("https://ชื่อโปรเจกต์ของคุณ.onrender.com/api/reservations", {
+        const res = await fetch("https://resturant-duo.onrender.com/api/reservations", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
