@@ -3,16 +3,16 @@ document.addEventListener("DOMContentLoaded", async () => {
     const historyContainer = document.getElementById("historyContainer");
     const loading = document.getElementById("loading");
 
-    const token = localStorage.getItem("token");
+    // 1. ✅ แก้ชื่อให้ตรงกับตอนที่เซฟในหน้า Login
+    const token = localStorage.getItem("adminToken"); 
 
     try {
-
-        const res = await fetch("http://localhost:3000/api/reservations", {
+        // 2. ✅ แก้ URL ให้เป็นของ Render (หรือ Vercel) ที่คุณ Deploy ไว้
+        const res = await fetch("https://ชื่อโปรเจกต์ของคุณ.onrender.com/api/reservations", {
             headers: {
                 Authorization: `Bearer ${token}`
             }
         });
-
         const data = await res.json();
 
         loading.style.display = "none";
