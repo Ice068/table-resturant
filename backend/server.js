@@ -6,7 +6,7 @@ const path = require('path');
 
 // เรียกใช้ better-sqlite3
 const Database = require('better-sqlite3');
-const db = new Database('./database.sqlite'); 
+const db = new Database('./database_v2.sqlite'); 
 
 // === สร้างตารางอัตโนมัติ (ป้องกัน Database พังตอนขึ้น Server) ===
 db.exec(`
