@@ -160,7 +160,7 @@ form.addEventListener("submit", async function(e){ // 🔥 เติม async �
             tableCount.style.color = "#08b222";
             renderTimeOptions();
         } else {
-            showAlert(data.message || "Failed to reserve", "danger");
+            showAlert(data.message || data.error || "Failed to reserve", "danger");
         }
 
     } catch (error) {
