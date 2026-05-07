@@ -1,63 +1,50 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", async () => {
 
-    const form = document.getElementById("historyForm");
-    const message = document.getElementById("formMessage");
-    const submitBtn = form.querySelector("button");
+    const historyContainer = document.getElementById("historyContainer");
+    const loading = document.getElementById("loading");
 
-    function showMessage(text, color="white"){
-        message.innerText = text;
-        message.style.color = color;
-    }
+    const token = localStorage.getItem("token");
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    try {
 
-        const reserveNumber = document.getElementById("reserveNumber").value.trim();
-        const email = document.getElementById("email").value.trim();
-        const phone = document.getElementById("phone").value.trim();
-        const otp = document.getElementById("otp").value.trim();
-
-        if(!reserveNumber || !email || !phone || !otp){
-            return showMessage("Please fill all fields", "red");
-        }
-
-        submitBtn.disabled = true;
-        submitBtn.innerText = "Verifying...";
-
-        try {
-
-            const res = await fetch("http://localhost:3000/verify-reservation", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                body: JSON.stringify({
-                    reserveNumber,
-                    email,
-                    phone,
-                    otp
-                })
-            });
-
-            const data = await res.json();
-
-            if(res.ok){
-                showMessage("✔ Reservation Verified!", "#d4af37");
-
-                console.log("DATA:", data);
-
-                form.reset();
-            }else{
-                showMessage(data.message || "Failed", "red");
+        const res = await fetch("http://localhost:3000/api/reservations", {
+            headers: {
+                Authorization: `Bearer ${token}`
             }
+        });
 
-        } catch (err){
-            console.error(err);
-            showMessage("Server error", "red");
+        const data = await res.json();
+
+        loading.style.display = "none";
+
+        if (!res.ok) {
+            historyContainer.innerHTML = `
+                <p>${data.message}</p>
+            `;
+            return;
         }
 
-        submitBtn.disabled = false;
-        submitBtn.innerText = "Verify";
-    });
+        data.forEach(item => {
+
+            const div = document.createElement("div");
+
+            div.innerHTML = `
+                <h3>${item.fullname}</h3>
+                <p>${item.email}</p>
+                <p>${item.date}</p>
+                <p>${item.time}</p>
+            `;
+
+            historyContainer.appendChild(div);
+
+        });
+
+    } catch(err) {
+
+        console.error(err);
+
+        loading.innerText = "Failed to load";
+
+    }
 
 });

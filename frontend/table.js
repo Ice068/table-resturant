@@ -146,7 +146,7 @@ form.addEventListener("submit", function(e){
 
     form.reset();
     tableCount.textContent = MAX_TABLES;
-    tableCount.style.color = "#7CFFB2";
+    tableCount.style.color = "#08b222";
 
     renderTimeOptions(); // refresh ใหม่
 });

@@ -204,3 +204,14 @@ select.form-control{
     }
 }
 
+/* บังคับสีตัวอักษรในรายการ Dropdown ให้เป็นสีดำ หรือสีเข้ม */
+select option {
+    background-color: #1a1a1a; /* เปลี่ยนพื้นหลังของ list เป็นสีมืดเพื่อให้เข้ากับ Theme */
+    color: white;              /* สีตัวอักษรเป็นสีขาว */
+}
+
+/* เพิ่มเติม: สำหรับ Browser บางตัวที่บังคับสีไม่ได้ ให้ลองแบบนี้ */
+select.form-control option {
+    color: #000; /* หรือใช้สีดำไปเลยเพื่อความชัวร์ */
+    background-color: #fff;
+}
