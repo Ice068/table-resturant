@@ -5,8 +5,7 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "node server.js",
-    "install": "npm install sqlite3 --build-from-source --sqlite=/usr"
+    "start": "node server.js"
   },
   "keywords": [],
   "author": "",
