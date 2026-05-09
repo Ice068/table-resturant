@@ -1,0 +1,156 @@
+## หน้าที่สมาชิก
+
+---
+
+| รหัสนักศึกษา | ชื่อ-นามสกุล | หน้าที่ |
+| :--- | :---: | ---: |
+| 68030059 | นางสาวชรัตน์ดา ไพคำนาม	 | Database Feature/Admin |
+| 68030072 | นางสาวฐิติกานต์ ประสิทธิ์  | Backend Feature/Customer |
+| 68030116 | นายธนภัทร ดิสโร | Frontend Feature/Admin |
+| 68030120 | นายธนาเทพ ธีรปกรณ์ | Frontend Feature/Customer |
+| 68030232 | นายภูผาสุข ผาสุข | UX/UI Desgin & Test case & QC & Support & Deploy|
+| 68030238 | นางสาวเมจิยานันท์ กันยะ | Backend Feature/Admin |
+| 68030246 | นางสาวรัศมี แสงทอง | Database Feature/Customer |
+
+---
+
+## SRS
+การจัดการร้านอาหาร --> พัฒนาการการจองโต๊ะล่วงหน้า
+
+
+## ผลงานการออกแบบ
+
+1. System Architecture
+![alt text](image-9.png)
+---
+
+
+2. Use case diagram
+![alt text](img/usecasediagram.png)
+
+
+
+3. Activity Diagram
+![alt text](image-10.png)
+
+
+4. ER Diagram
+![alt text](image-11.png)
+
+
+5. UX/UI
+
+## Customer
+- Homepage
+![alt text](image.png)
+
+- Reserve
+![alt text](image-1.png)
+
+- History
+![alt text](image-2.png)
+
+- Visit us
+![alt text](image-3.png)
+
+- Dining 
+![alt text](image-4.png)
+
+---
+
+## Admin
+
+- Login
+![alt text](image-5.png)
+
+- Dashboard
+![alt text](image-6.png)
+
+- Management
+![alt text](image-7.png)
+
+- Table Status
+![alt text](image-8.png)
+
+---
+
+## Tech stack
+
+- Ux/Ui desgin : Figma
+- FrontEnd : HTML CSS Js 
+- Backend : json js
+- DataBase : sqlite
+- API : Leaflet.js API = สร้าง Map
+
+## Test  case ของระบบ และผลการทดสอบระบบในส่วนที่พัฒนา, API Testing
+![alt text](11AF70E5-B597-4DBA-BF6F-B3E53219E34F.jpg)
+![alt text](5DC974C8-601C-4627-93A0-1DB5C662B1D7.jpg)
+
+## API End-Point
+- admin : 
+
+1. POST /login
+- Description: ใช้สำหรับเข้าสู่ระบบ Admin
+- Request: username, password
+- Response: token
+
+2. GET /dashboard
+- Description: ใช้สำหรับดึงข้อมูล Dashboard
+- Header: Authorization (token)
+- Response: stats, orders, charts
+
+- user :
+
+1. GET - ดูรายการทั้งหมด
+- Description: ใช้สำหรับดึงข้อมูลรายการจองทั้งหมดจากระบบ (ข้อมูลถูกเก็บแบบ in-memory)
+- Header: Content-Type: application/json
+- Response: """" [
+  {
+    "id": 1,
+    "name": "Table for 2",
+    "price": 1200
+  },
+  {
+    "id": 2,
+    "name": "Table for 4",
+    "price": 2000
+  }
+] """"
+
+2. POST - เพิ่มการจอง
+- Description: ใช้สำหรับเพิ่มรายการจองใหม่เข้าสู่ระบบ โดยต้องระบุชื่อและราคา
+- Header: Content-Type: application/json
+- Request Body : """ {
+  "id": 3,
+  "name": "Table for 6",
+  "price": 3000
+} """
+- Response : """ {
+  "message": "Reservation added"
+} """
+- Error Response : """ {
+  "message": "Invalid data"
+} """
+
+3. DELETE - ลบการจอง
+- Description: ใช้สำหรับลบข้อมูลการจองตาม id ที่ระบุ
+- Header: Content-Type: application/json
+- Response: """ {
+  "message": "Deleted successfully"
+} """ 
+
+4. POST - ตรวจสอบ history
+- Description: ใช้สำหรับตรวจสอบประวัติการจอง โดยผู้ใช้ต้องกรอกข้อมูลยืนยัน เช่น หมายเลขจอง อีเมล เบอร์โทร
+- Header: Content-Type: application/json
+- Request Body : """ {
+  "reserveNumber": 1,
+  "email": "test@email.com",
+  "phone": "0999999999",
+} """
+- Response : """{
+  "message": "Verified",
+  "_id": 1
+} """
+- Error Response :"""{
+  "message": "Invalid information"
+} """
