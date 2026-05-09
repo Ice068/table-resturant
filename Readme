@@ -81,6 +81,7 @@
 - Backend : json js
 - DataBase : sqlite
 - API : Leaflet.js API = สร้าง Map
+- Deploy : Render
 
 ## Test  case ของระบบ และผลการทดสอบระบบในส่วนที่พัฒนา, API Testing
 ![alt text](11AF70E5-B597-4DBA-BF6F-B3E53219E34F.jpg)
